@@ -1,0 +1,17 @@
+@use "styles/variables" as var;
+
+.app {
+  background: var.$mainBg;
+  padding: 2rem 4rem;
+  min-height: 100vh;
+}
+
+.layout {
+  width: 100%;
+}
+
+.title {
+  font-size: 2.4rem;
+  color: var.$white;
+  margin-bottom: 3.5rem;
+}

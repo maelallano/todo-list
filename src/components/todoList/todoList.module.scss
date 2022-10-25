@@ -1,0 +1,16 @@
+@use "styles/variables" as var;
+
+.todoList {
+    display: flex;
+}
+
+.button {
+  width: var.$widthList;
+  background-color: rgba(217, 217, 217, 0.2);
+  border-radius: var.$borderRadius;
+  font-size: var.$fontSizeText;
+  color: var.$white;
+  padding: 1.2rem 0rem;
+  height: fit-content;
+  cursor: pointer;
+}

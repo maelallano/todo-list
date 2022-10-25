@@ -1,0 +1,14 @@
+@use "styles/variables" as var;
+
+.card {
+  background-color: var.$white;
+  border-radius: var.$borderRadius;
+  padding: 1.1rem;
+  margin-bottom: var.$mainSpacing;
+}
+
+.description {
+  font-size: var.$fontSizeText;
+  color: var.$black;
+  line-height: 1.7rem;
+}
