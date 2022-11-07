@@ -1,24 +1,26 @@
 import styles from "./List.module.scss";
 
-import { TodosType } from "helpers/types";
+import { ListType, TodosType } from "helpers/types";
 import { Todo, AddTodo } from "..";
 
 type Props = {
-  index?: number;
-  title: string;
+  list: ListType;
   todos?: TodosType;
   setTodosData: React.Dispatch<React.SetStateAction<TodosType>>;
 };
 
-const List: React.FC<Props> = ({ index, title, todos, setTodosData }) => {
+const List: React.FC<Props> = ({ list, todos, setTodosData }) => {
+  const { id, title } = list;
   return (
-    <div key={`list_${index}`} className={styles.list}>
+    <li className={styles.list}>
       <h3 className={styles.title}>{title}</h3>
-      {todos?.map((todo, index) => (
-        <Todo title={todo.title} index={index} />
-      ))}
-      <AddTodo setTodosData={setTodosData} />
-    </div>
+      <ul>
+        {todos?.map((todo, index) => (
+          <Todo title={todo.title} key={`todo_${todo.id}_${index}`} />
+        ))}
+      </ul>
+      <AddTodo setTodosData={setTodosData} listId={id} />
+    </li>
   );
 };
 

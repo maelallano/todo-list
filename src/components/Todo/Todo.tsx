@@ -1,15 +1,14 @@
 import styles from "./Todo.module.scss";
 
 type Props = {
-  index: number;
   title: string;
 };
 
-const Todo: React.FC<Props> = ({ index, title }) => {
+const Todo: React.FC<Props> = ({ title }) => {
   return (
-    <div key={`todo_${index}`} className={styles.todo}>
+    <li className={styles.todo}>
       <p className={styles.title}>{title}</p>
-    </div>
+    </li>
   );
 };
 

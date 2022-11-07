@@ -45,17 +45,19 @@ const Project: React.FC<Props> = () => {
             Reset data
           </button>
         </header>
-        <main className={styles.todoList}>
-          {listsData?.map((list: ListType, index: number) => (
-            <List
-              index={index}
-              title={list.name}
-              todos={todosData?.filter(
-                (todo: TodoType) => todo.listId === list.id
-              )}
-              setTodosData={setTodosData}
-            />
-          ))}
+        <main className={styles.main}>
+          <ul className={styles.todoList}>
+            {listsData?.map((list: ListType, index: number) => (
+              <List
+                key={`list_${list.id}_${index}`}
+                list={list}
+                todos={todosData?.filter(
+                  (todo: TodoType) => todo.listId === list.id
+                )}
+                setTodosData={setTodosData}
+              />
+            ))}
+          </ul>
           <AddList setListsData={setListsData} />
         </main>
       </div>

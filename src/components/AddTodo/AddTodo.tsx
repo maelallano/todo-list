@@ -1,48 +1,72 @@
 import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import styles from "./AddTodo.module.scss";
 
 import { TodosType } from "helpers/types";
 import { addTodoLS } from "helpers/localStorage";
 
-type Props = { setTodosData: React.Dispatch<React.SetStateAction<TodosType>> };
+type FormValues = {
+  title: string;
+};
 
-const AddTodo: React.FC<Props> = ({ setTodosData }) => {
+type Props = {
+  setTodosData: React.Dispatch<React.SetStateAction<TodosType>>;
+  listId: number;
+};
+
+const AddTodo: React.FC<Props> = ({ setTodosData, listId }) => {
   const [isAdding, setIsAdding] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    // formState: { errors },
+    setFocus,
+  } = useForm<FormValues>();
 
-  function handleAddTodo() {
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
     setIsAdding(false);
+    reset();
 
     const valueToAdd = {
-      id: 1,
-      // icon: "⭕️",
-      listId: 1,
-      title: "TEST",
-      description: "Fill out human interest distribution form",
+      id: 0,
+      listId,
+      title: data.title,
+      description: "",
     };
 
     setTodosData(addTodoLS(valueToAdd));
+  };
+
+  function handleAddCard() {
+    setIsAdding(true);
+    setFocus("title");
+  }
+
+  function handleCancel() {
+    setIsAdding(false);
+    reset();
   }
 
   return (
     <>
       {isAdding ? (
         <div>
-          <input />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <input {...register("title", { required: true })} />
+            {/* {errors.title && <span>This field is required</span>} */}
+
+            <input type="submit" value="Add a card" />
+          </form>
           <div>
-            <button onClick={handleAddTodo} className={styles.button}>
-              Add a card
-            </button>
-            <button
-              onClick={() => setIsAdding(false)}
-              className={styles.button}
-            >
+            <button onClick={handleCancel} className={styles.button}>
               Cancel
             </button>
           </div>
         </div>
       ) : (
-        <button onClick={() => setIsAdding(true)} className={styles.button}>
+        <button onClick={handleAddCard} className={styles.button}>
           Add a card
         </button>
       )}

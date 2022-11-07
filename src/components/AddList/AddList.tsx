@@ -11,8 +11,7 @@ const AddList: React.FC<Props> = ({ setListsData }) => {
   function handleAddList() {
     const valueToAdd = {
       id: 1,
-      name: "open",
-      // icon: "⭕️",
+      title: "open",
       color: "#EB5A46",
     };
 
