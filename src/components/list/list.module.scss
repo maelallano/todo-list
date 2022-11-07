@@ -4,7 +4,7 @@
   background-color: var.$lightgrey;
   border-radius: var.$borderRadius;
   padding: 1.1rem var.$mainSpacing var.$mainSpacing var.$mainSpacing;
-  width: var.$widthList;
+  min-width: var.$widthList;
   margin-right: var.$mainSpacing;
   height: fit-content;
 }
@@ -13,4 +13,7 @@
   font-weight: bold;
   font-size: var.$fontSizeText;
   margin-bottom: 1.2rem;
+}
+.title:first-letter {
+  text-transform: capitalize;
 }

@@ -9,7 +9,7 @@ import { KeysLS } from "helpers/constants";
 
 type Props = {};
 
-const App: React.FC<Props> = () => {
+const Project: React.FC<Props> = () => {
   const [listsData, setListsData] = useState<ListsType>(
     JSON.parse(localStorage.getItem(KeysLS.Lists) || "")
   );
@@ -27,7 +27,7 @@ const App: React.FC<Props> = () => {
   }
 
   return (
-    <div className={styles.app}>
+    <div className={styles.project}>
       <div className={styles.layout}>
         <header>
           <h1 className={styles.title}>Todo list project</h1>
@@ -63,4 +63,4 @@ const App: React.FC<Props> = () => {
   );
 };
 
-export default App;
+export default Project;

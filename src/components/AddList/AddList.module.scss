@@ -1,7 +1,7 @@
 @use "styles/variables" as var;
 
 .button {
-  width: var.$widthList;
+  min-width: var.$widthList;
   background-color: rgba(217, 217, 217, 0.2);
   border-radius: var.$borderRadius;
   font-size: var.$fontSizeText;

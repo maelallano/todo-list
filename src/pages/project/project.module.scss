@@ -1,13 +1,15 @@
 @use "styles/variables" as var;
 
-.app {
+.project {
   background: var.$mainBg;
-  padding: 2rem 4rem;
-  min-height: 100vh;
+  overflow: scroll;
 }
 
 .layout {
-  width: 100%;
+  width: fit-content;
+  padding: 2rem 4rem;
+  min-height: 100vh;
+  height: fit-content;
 }
 
 .title {
