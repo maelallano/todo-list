@@ -11,14 +11,16 @@ type Props = {};
 
 const Project: React.FC<Props> = () => {
   const [listsData, setListsData] = useState<ListsType>(
-    JSON.parse(localStorage.getItem(KeysLS.Lists) || "")
+    JSON.parse(localStorage.getItem(KeysLS.Lists) || "[]")
   );
   const [todosData, setTodosData] = useState<TodosType>(
-    JSON.parse(localStorage.getItem(KeysLS.Todos) || "")
+    JSON.parse(localStorage.getItem(KeysLS.Todos) || "[]")
   );
 
   // console.log("listsData: ", listsData);
   // console.log("todosData: ", todosData);
+  // localStorage.setItem(KeysLS.Lists, JSON.stringify(dataLists));
+  // localStorage.setItem(KeysLS.Todos, JSON.stringify(dataTodos));
 
   function handleResetData() {
     localStorage.setItem(KeysLS.Lists, JSON.stringify(dataLists));

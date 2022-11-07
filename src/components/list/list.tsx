@@ -16,7 +16,11 @@ const List: React.FC<Props> = ({ list, todos, setTodosData }) => {
       <h3 className={styles.title}>{title}</h3>
       <ul>
         {todos?.map((todo, index) => (
-          <Todo title={todo.title} key={`todo_${todo.id}_${index}`} />
+          <Todo
+            todo={todo}
+            key={`todo_${todo.id}_${index}`}
+            setTodosData={setTodosData}
+          />
         ))}
       </ul>
       <AddTodo setTodosData={setTodosData} listId={id} />
