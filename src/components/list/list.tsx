@@ -1,22 +1,23 @@
-import styles from "./list.module.scss";
+import styles from "./List.module.scss";
 
-import { CardsType } from "helpers/types";
-import { Card } from "..";
+import { TodosType } from "helpers/types";
+import { Todo, AddTodo } from "..";
 
 type Props = {
   index?: number;
   title: string;
-  cards?: CardsType[];
+  todos?: TodosType;
+  setTodosData: React.Dispatch<React.SetStateAction<TodosType>>;
 };
 
-const List: React.FC<Props> = ({ index, title, cards }) => {
+const List: React.FC<Props> = ({ index, title, todos, setTodosData }) => {
   return (
     <div key={`list_${index}`} className={styles.list}>
       <h3 className={styles.title}>{title}</h3>
-      {cards?.map((card, index) => (
-        <Card description={card.description} index={index} />
+      {todos?.map((todo, index) => (
+        <Todo title={todo.title} index={index} />
       ))}
-      <button className={styles.button}>Add a card</button>
+      <AddTodo setTodosData={setTodosData} />
     </div>
   );
 };

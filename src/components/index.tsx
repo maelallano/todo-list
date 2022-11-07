@@ -1,5 +1,6 @@
-import TodoList from "./todoList/todoList";
-import List from "./list/list";
-import Card from "./card/card";
+import List from "./List/List";
+import Todo from "./Todo/Todo";
+import AddList from "./AddList/AddList";
+import AddTodo from "./AddTodo/AddTodo";
 
-export { TodoList, List, Card };
+export { List, Todo, AddList, AddTodo };

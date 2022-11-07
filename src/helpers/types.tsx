@@ -1,13 +1,14 @@
-export interface CardsType {
+export interface ListType {
+  id: number;
+  name: string;
+  color: string;
+}
+export type ListsType = ListType[];
+
+export interface TodoType {
+  id: number;
+  title: string;
   description: string;
+  listId: number;
 }
-
-export interface ListsType {
-  title: string;
-  cards: CardsType[];
-}
-
-export interface TodoListType {
-  title: string;
-  lists: ListsType[];
-}
+export type TodosType = TodoType[];
