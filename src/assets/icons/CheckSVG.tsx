@@ -32,7 +32,7 @@ const CheckSVG = () => (
           strokeLinecap: "butt",
           strokeLinejoin: "miter",
           strokeMiterlimit: 10,
-          fill: "rgb(40,201,55)",
+          fill: "rgb(39, 198, 124)",
           fillRule: "nonzero",
           opacity: 1,
         }}

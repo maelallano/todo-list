@@ -49,17 +49,19 @@ const Project: React.FC<Props> = () => {
         </header>
         <main className={styles.main}>
           <ul className={styles.todoList}>
-            {listsData?.map((list: ListType, index: number) => (
-              <List
-                key={`list_${list.id}_${index}`}
-                list={list}
-                todos={todosData?.filter(
-                  (todo: TodoType) => todo.listId === list.id
-                )}
-                setListsData={setListsData}
-                setTodosData={setTodosData}
-              />
-            ))}
+            {listsData
+              .sort((a, b) => a.order - b.order)
+              .map((list: ListType, index: number) => (
+                <List
+                  key={`list_${list.id}_${index}`}
+                  list={list}
+                  todos={todosData.filter(
+                    (todo: TodoType) => todo.listId === list.id
+                  )}
+                  setListsData={setListsData}
+                  setTodosData={setTodosData}
+                />
+              ))}
           </ul>
           <AddList setListsData={setListsData} />
         </main>

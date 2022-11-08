@@ -32,6 +32,7 @@ const AddList: React.FC<Props> = ({ setListsData }) => {
       title: data.title,
       // icon: "⭕️",
       color: "#EB5A46",
+      order: 0,
     };
 
     setListsData(addListLS(valueToAdd));

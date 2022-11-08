@@ -24,19 +24,19 @@ type Props = {
 const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
   const { title, listId } = todo;
   const { register, handleSubmit, watch } = useForm<FormValues>();
-  const refSubmitButtom = useRef<HTMLButtonElement>(null);
+  const refSubmitButton = useRef<HTMLButtonElement>(null);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     setTodosData(
       updateTodoLS({
         ...todo,
         listId: Number(data.list),
-        priority: data.priority,
+        priority: Number(data.priority),
       })
     );
   };
 
-  const triggerSubmit = () => refSubmitButtom?.current?.click();
+  const triggerSubmit = () => refSubmitButton?.current?.click();
 
   useEffect(() => {
     const subscription = watch(triggerSubmit);
@@ -62,7 +62,7 @@ const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
 
           <div className={styles.topBar_right}>
             <select {...register("list")} value={getListLS(listId)?.id}>
-              {getListsLS()?.map((value: ListType) => (
+              {getListsLS().map((value: ListType) => (
                 <option key={value.id} value={value.id}>
                   {value.title}
                 </option>
@@ -77,7 +77,7 @@ const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
 
         <p className={styles.title}>{title}</p>
 
-        <button hidden={true} ref={refSubmitButtom} type={"submit"} />
+        <button hidden={true} ref={refSubmitButton} type={"submit"} />
       </form>
     </li>
   );

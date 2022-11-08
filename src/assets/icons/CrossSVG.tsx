@@ -30,7 +30,7 @@ const CrossSVG = () => (
           strokeLinecap: "butt",
           strokeLinejoin: "miter",
           strokeMiterlimit: 10,
-          fill: "rgb(236,0,0)",
+          fill: "rgb(188,60,60)",
           fillRule: "nonzero",
           opacity: 1,
         }}

@@ -4,17 +4,20 @@ import { generateUniqueId } from "./utils";
 
 // ---------- CRUD for Lists ----------
 // CREATE
-export function addListLS(valueToAdd: ListType): ListsType {
-  const valueTemp = getListsLS();
+export function addListLS(listToAdd: ListType): ListsType {
+  const lists = getListsLS();
 
-  const newUniqueId = valueTemp.length
-    ? generateUniqueId(valueTemp.map((v: ListType) => v.id))
+  const newUniqueId = lists.length
+    ? generateUniqueId(lists.map((v: ListType) => v.id))
     : 0;
 
-  const newValue = [...valueTemp, { ...valueToAdd, id: newUniqueId }];
-  localStorage.setItem(KeysLS.Lists, JSON.stringify(newValue));
+  const newLists = [
+    ...lists,
+    { ...listToAdd, id: newUniqueId, order: lists.length },
+  ];
+  localStorage.setItem(KeysLS.Lists, JSON.stringify(newLists));
 
-  return newValue;
+  return newLists;
 }
 
 // READ
@@ -26,18 +29,58 @@ export function getListLS(id: number): ListType | undefined {
 
 // UPDATE
 export function updateListLS() {}
+export function updateListsOrderLS(
+  listToUpdate: ListType,
+  newOrder: number
+): ListsType {
+  const tempUpdatedLists = getListsLS().map((listOld: ListType) => ({
+    ...listOld,
+    ...[{ ...listToUpdate, order: newOrder }].find(
+      (listNew) => listNew.id === listOld.id
+    ),
+  }));
+
+  const direction = newOrder < listToUpdate.order ? "LEFT" : "RIGHT";
+
+  const updatedLists = tempUpdatedLists.map((listOld: ListType) => {
+    if (listOld.id === listToUpdate.id) return { ...listOld };
+    if (
+      direction === "LEFT" &&
+      listOld.order <= listToUpdate.order &&
+      listOld.order >= newOrder
+    )
+      return { ...listOld, order: listOld.order + 1 };
+    if (
+      direction === "RIGHT" &&
+      listOld.order >= listToUpdate.order &&
+      listOld.order <= newOrder
+    )
+      return { ...listOld, order: listOld.order - 1 };
+    return { ...listOld };
+  });
+
+  localStorage.setItem(KeysLS.Lists, JSON.stringify(updatedLists));
+
+  return updatedLists;
+}
 
 // DELETE
-export function removeListLS(listIdToRemove: number): {
+export function removeListLS(listToRemove: ListType): {
   updatedLists: ListsType;
   updatedTodos: TodosType;
 } {
+  const { id: listIdToRemove, order } = listToRemove;
   const lists = getListsLS();
   const todos = getTodosLS();
 
-  const updatedLists = lists.filter(
-    (listOld: ListType) => listOld.id !== listIdToRemove
-  );
+  const updatedLists = lists
+    .filter((listOld: ListType) => listOld.id !== listIdToRemove)
+    .map((listOld: ListType) =>
+      listOld.order > order
+        ? { ...listOld, order: listOld.order - 1 }
+        : { ...listOld }
+    );
+
   localStorage.setItem(KeysLS.Lists, JSON.stringify(updatedLists));
 
   const updatedTodos = todos.filter(
@@ -50,17 +93,17 @@ export function removeListLS(listIdToRemove: number): {
 
 // ---------- CRUD for Todos ----------
 // CREATE
-export function addTodoLS(valueToAdd: TodoType): TodosType {
-  const valueTemp = getTodosLS();
+export function addTodoLS(todoToAdd: TodoType): TodosType {
+  const todos = getTodosLS();
 
-  const newUniqueId = valueTemp.length
-    ? generateUniqueId(valueTemp.map((v: TodoType) => v.id))
+  const newUniqueId = todos.length
+    ? generateUniqueId(todos.map((v: TodoType) => v.id))
     : 0;
 
-  const newValue = [...valueTemp, { ...valueToAdd, id: newUniqueId }];
-  localStorage.setItem(KeysLS.Todos, JSON.stringify(newValue));
+  const newTodos = [...todos, { ...todoToAdd, id: newUniqueId }];
+  localStorage.setItem(KeysLS.Todos, JSON.stringify(newTodos));
 
-  return newValue;
+  return newTodos;
 }
 
 // READ
