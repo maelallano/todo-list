@@ -30,7 +30,7 @@ const FlagSVG = () => (
           strokeLinecap: "butt",
           strokeLinejoin: "miter",
           strokeMiterlimit: 10,
-          fill: "rgb(0, 0, 0)",
+          fill: "#3041a6",
           fillRule: "nonzero",
           opacity: 1,
         }}
@@ -46,7 +46,7 @@ const FlagSVG = () => (
           strokeLinecap: "butt",
           strokeLinejoin: "miter",
           strokeMiterlimit: 10,
-          fill: "rgb(0, 0, 0)",
+          fill: "#3041a6",
           fillRule: "nonzero",
           opacity: 1,
         }}
@@ -62,7 +62,7 @@ const FlagSVG = () => (
           strokeLinecap: "butt",
           strokeLinejoin: "miter",
           strokeMiterlimit: 10,
-          fill: "rgb(0, 0, 0)",
+          fill: "#3041a6",
           fillRule: "nonzero",
           opacity: 1,
         }}

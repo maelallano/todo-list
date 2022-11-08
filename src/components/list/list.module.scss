@@ -13,31 +13,54 @@
     .topBar {
       display: flex;
       justify-content: space-between;
-  
+
       .title {
         font-weight: bold;
         font-size: var.$fontSizeText;
         margin-bottom: 1.2rem;
-  
+        cursor: pointer;
+
         &:first-letter {
           text-transform: capitalize;
         }
       }
-  
+
+      .containerTitleInput {
+        display: flex;
+
+        .inputTitle {
+          font-weight: bold;
+          font-size: var.$fontSizeText;
+          margin-bottom: 1.2rem;
+        }
+
+        .cancelBtn {
+          width: 2rem;
+          height: 2rem;
+          cursor: pointer;
+          margin-left: 0.5rem;
+
+          svg {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+
       .topBar_right {
         display: flex;
         align-items: flex-start;
-  
+
         select {
           height: 1.8rem;
         }
-  
+
         .deleteBtn {
           width: 1.7rem;
           height: 1.7rem;
           cursor: pointer;
           margin-left: 0.5rem;
-  
+
           svg {
             width: 100%;
             height: 100%;

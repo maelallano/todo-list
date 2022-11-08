@@ -104,7 +104,6 @@ const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
                 onClick={handleSubmit(onSubmit)}
                 className={styles.addBtn}
               >
-                {/* <button onClick={handleUpdateTitle} className={styles.addBtn}> */}
                 <CheckSVG />
               </button>
               <button

@@ -28,7 +28,16 @@ export function getListLS(id: number): ListType | undefined {
 }
 
 // UPDATE
-export function updateListLS() {}
+export function updateListLS(updatedList: ListType): ListsType {
+  const updatedLists = getListsLS().map((listOld: ListType) => ({
+    ...listOld,
+    ...[updatedList].find((listNew) => listNew.id === listOld.id),
+  }));
+
+  localStorage.setItem(KeysLS.Lists, JSON.stringify(updatedLists));
+
+  return updatedLists;
+}
 export function updateListsOrderLS(
   listToUpdate: ListType,
   newOrder: number
