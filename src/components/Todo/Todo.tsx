@@ -4,10 +4,17 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./Todo.module.scss";
 
 import { ListType, TodosType, TodoType } from "helpers/types";
-import { getListLS, getListsLS, updateTodoLS } from "helpers/localStorage";
+import {
+  getListLS,
+  getListsLS,
+  updateTodoLS,
+  removeTodoLS,
+} from "helpers/localStorage";
+import { BinSVG, FlagSVG } from "assets/icons";
+import { PriorityValues } from "helpers/constants";
 // import Modal from "components/Modal/Modal";
 
-type FormValues = { list: number };
+type FormValues = { list: number; priority: number };
 
 type Props = {
   todo: TodoType;
@@ -19,8 +26,15 @@ const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
   const { register, handleSubmit, watch } = useForm<FormValues>();
   const refSubmitButtom = useRef<HTMLButtonElement>(null);
 
-  const onSubmit: SubmitHandler<FormValues> = (data) =>
-    setTodosData(updateTodoLS({ ...todo, listId: Number(data.list) }));
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    setTodosData(
+      updateTodoLS({
+        ...todo,
+        listId: Number(data.list),
+        priority: data.priority,
+      })
+    );
+  };
 
   const triggerSubmit = () => refSubmitButtom?.current?.click();
 
@@ -29,17 +43,40 @@ const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
     return () => subscription.unsubscribe();
   }, [watch]);
 
+  const handleDelete = () => setTodosData(removeTodoLS(todo.id));
+
   return (
     <li className={styles.todo}>
-      <p className={styles.title}>{title}</p>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <select {...register("list")} value={getListLS(listId)?.id}>
-          {getListsLS()?.map((value: ListType) => (
-            <option key={value.id} value={value.id}>
-              {value.title}
-            </option>
-          ))}
-        </select>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.topbar}>
+          <div className={styles.priorityContainer}>
+            <select {...register("priority")} value={todo.priority}>
+              {PriorityValues.map((value: number) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
+            </select>
+            <FlagSVG />
+          </div>
+
+          <div className={styles.topbar_right}>
+            <select {...register("list")} value={getListLS(listId)?.id}>
+              {getListsLS()?.map((value: ListType) => (
+                <option key={value.id} value={value.id}>
+                  {value.title}
+                </option>
+              ))}
+            </select>
+
+            <button className={styles.deleteBtn} onClick={handleDelete}>
+              <BinSVG />
+            </button>
+          </div>
+        </div>
+
+        <p className={styles.title}>{title}</p>
+
         <button hidden={true} ref={refSubmitButtom} type={"submit"} />
       </form>
     </li>

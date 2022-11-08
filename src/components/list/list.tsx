@@ -15,13 +15,15 @@ const List: React.FC<Props> = ({ list, todos, setTodosData }) => {
     <li className={styles.list}>
       <h3 className={styles.title}>{title}</h3>
       <ul>
-        {todos?.map((todo, index) => (
-          <Todo
-            todo={todo}
-            key={`todo_${todo.id}_${index}`}
-            setTodosData={setTodosData}
-          />
-        ))}
+        {todos
+          ?.sort((a, b) => b.priority - a.priority)
+          .map((todo, index) => (
+            <Todo
+              todo={todo}
+              key={`todo_${todo.id}_${index}`}
+              setTodosData={setTodosData}
+            />
+          ))}
       </ul>
       <AddTodo setTodosData={setTodosData} listId={id} />
     </li>

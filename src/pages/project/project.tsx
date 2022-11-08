@@ -32,7 +32,7 @@ const Project: React.FC<Props> = () => {
     <div className={styles.project}>
       <div className={styles.layout}>
         <header>
-          <h1 className={styles.title}>Todo list project</h1>
+          <h1 className={styles.title}>Todo list app</h1>
           <button
             style={{
               background: "white",

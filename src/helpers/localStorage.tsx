@@ -43,7 +43,17 @@ export function addTodoLS(valueToAdd: TodoType): TodosType {
   return newValue;
 }
 
-export function removeTodoLS() {}
+export function removeTodoLS(todoIdToRemove: number): TodosType {
+  const todos = JSON.parse(localStorage.getItem(KeysLS.Todos) || "[]");
+
+  const updatedTodos = todos.filter(
+    (todoOld: TodoType) => todoOld.id !== todoIdToRemove
+  );
+
+  localStorage.setItem(KeysLS.Todos, JSON.stringify(updatedTodos));
+
+  return updatedTodos;
+}
 
 export function updateTodoLS(updatedTodo: TodoType): TodosType {
   const todos = JSON.parse(localStorage.getItem(KeysLS.Todos) || "[]");
@@ -55,5 +65,5 @@ export function updateTodoLS(updatedTodo: TodoType): TodosType {
 
   localStorage.setItem(KeysLS.Todos, JSON.stringify(updatedTodos));
 
-  return updatedTodos
+  return updatedTodos;
 }

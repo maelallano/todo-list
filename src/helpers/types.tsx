@@ -10,5 +10,7 @@ export interface TodoType {
   title: string;
   description: string;
   listId: number;
+  // 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+  priority: number;
 }
 export type TodosType = TodoType[];

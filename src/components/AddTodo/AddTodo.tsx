@@ -5,6 +5,7 @@ import styles from "./AddTodo.module.scss";
 
 import { TodosType } from "helpers/types";
 import { addTodoLS } from "helpers/localStorage";
+import { PriorityValues } from "helpers/constants";
 
 type FormValues = {
   title: string;
@@ -34,6 +35,7 @@ const AddTodo: React.FC<Props> = ({ setTodosData, listId }) => {
       listId,
       title: data.title,
       description: "",
+      priority: PriorityValues[0]
     };
 
     setTodosData(addTodoLS(valueToAdd));
