@@ -9,78 +9,79 @@
   flex-direction: column;
   justify-content: space-between;
   // cursor: pointer;
-}
 
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.6rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
-}
-
-.topbar_right {
-  display: flex;
-}
-
-.form {
-  height: 100%;
-  select {
+  .form {
     height: 100%;
-  }
-}
+    select {
+      height: 100%;
+      max-width: 8rem;
+    }
 
-.deleteBtn {
-  width: 2rem;
-  height: 2rem;
-  margin-left: 1rem;
-  cursor: pointer;
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
 
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-}
+      .priorityContainer {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.6rem;
+        font-weight: 300;
+        width: 2.5rem;
+        cursor: pointer;
 
-.priorityContainer {
-  display: flex;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.6rem;
-  font-weight: 300;
-  width: 2.5rem;
-  cursor: pointer;
+        select {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+
+          &::-ms-expand {
+            display: none;
+          }
+        }
+
+        svg {
+          width: 1.4rem;
+          height: 1.4rem;
+          margin-left: 0.2rem;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          display: block;
+          pointer-events: none;
+        }
+      }
+
+      .topbar_right {
+        display: flex;
+        
+        .deleteBtn {
+          width: 2rem;
+          height: 2rem;
+          margin-left: 1rem;
+          cursor: pointer;
   
+          svg {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
 
-  svg {
-    width: 1.4rem;
-    height: 1.4rem;
-    margin-left: 0.2rem;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    display: block;
-    pointer-events: none;
+    }
+
+    .title {
+      font-size: var.$fontSizeText;
+      color: var.$black;
+      line-height: 1.7rem;
+    }
   }
-
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  }
-
-  select::-ms-expand {
-    display: none;
-  }
-}
-
-.title {
-  font-size: var.$fontSizeText;
-  color: var.$black;
-  line-height: 1.7rem;
 }

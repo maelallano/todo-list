@@ -5,15 +5,17 @@
   border-radius: var.$borderRadius;
   padding: 1.1rem var.$mainSpacing var.$mainSpacing var.$mainSpacing;
   min-width: var.$widthList;
+  width: var.$widthList;
   margin-right: var.$mainSpacing;
   height: fit-content;
-}
 
-.title {
-  font-weight: bold;
-  font-size: var.$fontSizeText;
-  margin-bottom: 1.2rem;
-}
-.title:first-letter {
-  text-transform: capitalize;
+  .title {
+    font-weight: bold;
+    font-size: var.$fontSizeText;
+    margin-bottom: 1.2rem;
+
+    &:first-letter {
+      text-transform: capitalize;
+    }
+  }
 }

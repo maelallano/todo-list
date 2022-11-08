@@ -3,21 +3,22 @@
 .project {
   background: var.$mainBg;
   overflow: scroll;
-}
 
-.layout {
-  width: fit-content;
-  padding: 2rem 4rem;
-  min-height: 100vh;
-  height: fit-content;
-}
+  .layout {
+    width: fit-content;
+    padding: 2rem 4rem;
+    min-height: 100vh;
+    height: fit-content;
 
-.title {
-  font-size: 2.4rem;
-  color: var.$white;
-  margin-bottom: 3.5rem;
-}
+    .title {
+      font-size: 2.4rem;
+      color: var.$white;
+      margin-bottom: 3.5rem;
+    }
 
-.main, .todoList {
-  display: flex;
+    .main,
+    .todoList {
+      display: flex;
+    }
+  }
 }

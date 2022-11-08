@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import styles from "./AddTodo.module.scss";
@@ -6,7 +6,7 @@ import styles from "./AddTodo.module.scss";
 import { TodosType } from "helpers/types";
 import { addTodoLS } from "helpers/localStorage";
 import { PriorityValues } from "helpers/constants";
-import { CheckSVG, CrossSVG } from "assets/icons";
+import { AddForm } from "components";
 
 type FormValues = {
   title: string;
@@ -42,10 +42,11 @@ const AddTodo: React.FC<Props> = ({ setTodosData, listId }) => {
     setTodosData(addTodoLS(valueToAdd));
   };
 
-  function handleAddCard() {
-    setIsAdding(true);
-    setFocus("title");
-  }
+  useEffect(() => {
+    if (isAdding) setFocus("title");
+  }, [isAdding]);
+
+  const handleAddCard = () => setIsAdding(true);
 
   function handleCancel() {
     setIsAdding(false);
@@ -55,25 +56,13 @@ const AddTodo: React.FC<Props> = ({ setTodosData, listId }) => {
   return (
     <>
       {isAdding ? (
-        <div>
-          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-            <textarea
-              {...register("title", { required: true })}
-              className={styles.inputTitle}
-              placeholder="Enter a title for this card..."
-            />
-            {/* {errors.title && <span>This field is required</span>} */}
-
-            <div className={styles.formContainer_right}>
-              <button onClick={handleSubmit(onSubmit)} className={styles.addBtn}>
-                <CheckSVG />
-              </button>
-              <button onClick={handleCancel} className={styles.cancelBtn}>
-                <CrossSVG />
-              </button>
-            </div>
-          </form>          
-        </div>
+        <AddForm
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          register={register}
+          handleCancel={handleCancel}
+          placeholder="Enter a title for this card..."
+        />
       ) : (
         <button onClick={handleAddCard} className={styles.button}>
           + Add a card

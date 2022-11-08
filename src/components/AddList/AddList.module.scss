@@ -9,4 +9,9 @@
   padding: 1.2rem 0rem;
   height: fit-content;
   cursor: pointer;
+  transition: ease-in-out 0.1s;
+
+  &:hover {
+    background-color: rgba(217, 217, 217, 0.3);
+  }
 }

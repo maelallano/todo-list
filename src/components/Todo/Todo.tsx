@@ -12,7 +12,7 @@ import {
 } from "helpers/localStorage";
 import { BinSVG, FlagSVG } from "assets/icons";
 import { PriorityValues } from "helpers/constants";
-// import Modal from "components/Modal/Modal";
+// import { Modal } from "components";
 
 type FormValues = { list: number; priority: number };
 

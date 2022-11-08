@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import styles from "./AddList.module.scss";
 
 import { ListsType } from "helpers/types";
 import { addListLS } from "helpers/localStorage";
+import { AddForm } from "components";
 
 type FormValues = {
   title: string;
@@ -36,10 +37,11 @@ const AddList: React.FC<Props> = ({ setListsData }) => {
     setListsData(addListLS(valueToAdd));
   };
 
-  function handleAddList() {
-    setIsAdding(true);
-    setFocus("title");
-  }
+  useEffect(() => {
+    if (isAdding) setFocus("title");
+  }, [isAdding]);
+
+  const handleAddList = () => setIsAdding(true);
 
   function handleCancel() {
     setIsAdding(false);
@@ -49,19 +51,13 @@ const AddList: React.FC<Props> = ({ setListsData }) => {
   return (
     <>
       {isAdding ? (
-        <div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register("title", { required: true })} />
-            {/* {errors.title && <span>This field is required</span>} */}
-
-            <input type="submit" value="Add a card" />
-          </form>
-          <div>
-            <button onClick={handleCancel} className={styles.button}>
-              Cancel
-            </button>
-          </div>
-        </div>
+        <AddForm
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          register={register}
+          handleCancel={handleCancel}
+          placeholder="Enter a title for this list..."
+        />
       ) : (
         <button onClick={handleAddList} className={styles.button}>
           Add a category
