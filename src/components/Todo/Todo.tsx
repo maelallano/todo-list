@@ -48,7 +48,7 @@ const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
   return (
     <li className={styles.todo}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.topbar}>
+        <div className={styles.topBar}>
           <div className={styles.priorityContainer}>
             <select {...register("priority")} value={todo.priority}>
               {PriorityValues.map((value: number) => (
@@ -60,7 +60,7 @@ const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
             <FlagSVG />
           </div>
 
-          <div className={styles.topbar_right}>
+          <div className={styles.topBar_right}>
             <select {...register("list")} value={getListLS(listId)?.id}>
               {getListsLS()?.map((value: ListType) => (
                 <option key={value.id} value={value.id}>

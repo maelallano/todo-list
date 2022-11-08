@@ -56,6 +56,7 @@ const Project: React.FC<Props> = () => {
                 todos={todosData?.filter(
                   (todo: TodoType) => todo.listId === list.id
                 )}
+                setListsData={setListsData}
                 setTodosData={setTodosData}
               />
             ))}

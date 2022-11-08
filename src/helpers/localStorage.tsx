@@ -2,16 +2,10 @@ import { KeysLS } from "./constants";
 import { ListsType, ListType, TodosType, TodoType } from "./types";
 import { generateUniqueId } from "./utils";
 
-// CRUD for Lists
-export function getListsLS(): ListsType {
-  return JSON.parse(localStorage.getItem("lists") || "[]");
-}
-export function getListLS(id: number): ListType | undefined {
-  return getListsLS().find((list) => list.id === id);
-}
-
+// ---------- CRUD for Lists ----------
+// CREATE
 export function addListLS(valueToAdd: ListType): ListsType {
-  const valueTemp = JSON.parse(localStorage.getItem(KeysLS.Lists) || "[]");
+  const valueTemp = getListsLS();
 
   const newUniqueId = valueTemp.length
     ? generateUniqueId(valueTemp.map((v: ListType) => v.id))
@@ -23,15 +17,41 @@ export function addListLS(valueToAdd: ListType): ListsType {
   return newValue;
 }
 
-export function removeListLS() {}
+// READ
+export const getListsLS = (): ListsType =>
+  JSON.parse(localStorage.getItem(KeysLS.Lists) || "[]");
+export function getListLS(id: number): ListType | undefined {
+  return getListsLS().find((list) => list.id === id);
+}
+
+// UPDATE
 export function updateListLS() {}
 
-// CRUD for Todos
-export function getTodosLS() {}
-export function getTodoLS() {}
+// DELETE
+export function removeListLS(listIdToRemove: number): {
+  updatedLists: ListsType;
+  updatedTodos: TodosType;
+} {
+  const lists = getListsLS();
+  const todos = getTodosLS();
 
+  const updatedLists = lists.filter(
+    (listOld: ListType) => listOld.id !== listIdToRemove
+  );
+  localStorage.setItem(KeysLS.Lists, JSON.stringify(updatedLists));
+
+  const updatedTodos = todos.filter(
+    (todoOld: TodoType) => todoOld.listId !== listIdToRemove
+  );
+  localStorage.setItem(KeysLS.Todos, JSON.stringify(updatedTodos));
+
+  return { updatedLists, updatedTodos };
+}
+
+// ---------- CRUD for Todos ----------
+// CREATE
 export function addTodoLS(valueToAdd: TodoType): TodosType {
-  const valueTemp = JSON.parse(localStorage.getItem(KeysLS.Todos) || "[]");
+  const valueTemp = getTodosLS();
 
   const newUniqueId = valueTemp.length
     ? generateUniqueId(valueTemp.map((v: TodoType) => v.id))
@@ -43,25 +63,28 @@ export function addTodoLS(valueToAdd: TodoType): TodosType {
   return newValue;
 }
 
-export function removeTodoLS(todoIdToRemove: number): TodosType {
-  const todos = JSON.parse(localStorage.getItem(KeysLS.Todos) || "[]");
+// READ
+export const getTodosLS = (): TodosType =>
+  JSON.parse(localStorage.getItem(KeysLS.Todos) || "[]");
+export function getTodoLS() {}
 
-  const updatedTodos = todos.filter(
-    (todoOld: TodoType) => todoOld.id !== todoIdToRemove
-  );
+// UPDATE
+export function updateTodoLS(updatedTodo: TodoType): TodosType {
+  const updatedTodos = getTodosLS().map((todoOld: TodoType) => ({
+    ...todoOld,
+    ...[updatedTodo].find((todoNew) => todoNew.id === todoOld.id),
+  }));
 
   localStorage.setItem(KeysLS.Todos, JSON.stringify(updatedTodos));
 
   return updatedTodos;
 }
 
-export function updateTodoLS(updatedTodo: TodoType): TodosType {
-  const todos = JSON.parse(localStorage.getItem(KeysLS.Todos) || "[]");
-
-  const updatedTodos = todos.map((todoOld: TodoType) => ({
-    ...todoOld,
-    ...[updatedTodo].find((todoNew) => todoNew.id === todoOld.id),
-  }));
+// DELETE
+export function removeTodoLS(todoIdToRemove: number): TodosType {
+  const updatedTodos = getTodosLS().filter(
+    (todoOld: TodoType) => todoOld.id !== todoIdToRemove
+  );
 
   localStorage.setItem(KeysLS.Todos, JSON.stringify(updatedTodos));
 
