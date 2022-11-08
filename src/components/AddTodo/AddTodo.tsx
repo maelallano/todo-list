@@ -6,6 +6,7 @@ import styles from "./AddTodo.module.scss";
 import { TodosType } from "helpers/types";
 import { addTodoLS } from "helpers/localStorage";
 import { PriorityValues } from "helpers/constants";
+import { CheckSVG, CrossSVG } from "assets/icons";
 
 type FormValues = {
   title: string;
@@ -35,7 +36,7 @@ const AddTodo: React.FC<Props> = ({ setTodosData, listId }) => {
       listId,
       title: data.title,
       description: "",
-      priority: PriorityValues[0]
+      priority: PriorityValues[0],
     };
 
     setTodosData(addTodoLS(valueToAdd));
@@ -55,21 +56,27 @@ const AddTodo: React.FC<Props> = ({ setTodosData, listId }) => {
     <>
       {isAdding ? (
         <div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register("title", { required: true })} />
+          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <textarea
+              {...register("title", { required: true })}
+              className={styles.inputTitle}
+              placeholder="Enter a title for this card..."
+            />
             {/* {errors.title && <span>This field is required</span>} */}
 
-            <input type="submit" value="Add a card" />
-          </form>
-          <div>
-            <button onClick={handleCancel} className={styles.button}>
-              Cancel
-            </button>
-          </div>
+            <div className={styles.formContainer_right}>
+              <button onClick={handleSubmit(onSubmit)} className={styles.addBtn}>
+                <CheckSVG />
+              </button>
+              <button onClick={handleCancel} className={styles.cancelBtn}>
+                <CrossSVG />
+              </button>
+            </div>
+          </form>          
         </div>
       ) : (
         <button onClick={handleAddCard} className={styles.button}>
-          Add a card
+          + Add a card
         </button>
       )}
     </>
