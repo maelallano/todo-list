@@ -10,11 +10,11 @@ import {
   updateTodoLS,
   removeTodoLS,
 } from "helpers/localStorage";
-import { BinSVG, FlagSVG } from "assets/icons";
+import { BinSVG, CheckSVG, CrossSVG, FlagSVG } from "assets/icons";
 import { PriorityValues } from "helpers/constants";
 // import { Modal } from "components";
 
-type FormValues = { list: number; priority: number };
+type FormValues = { list: number; priority: number; title: string };
 
 type Props = {
   todo: TodoType;
@@ -23,7 +23,8 @@ type Props = {
 
 const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
   const { title, listId } = todo;
-  const { register, handleSubmit, watch } = useForm<FormValues>();
+  const [isTitleVisible, setIsTitleVisible] = useState(true);
+  const { register, handleSubmit, watch, setValue } = useForm<FormValues>();
   const refSubmitButton = useRef<HTMLButtonElement>(null);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
@@ -32,16 +33,26 @@ const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
         ...todo,
         listId: Number(data.list),
         priority: Number(data.priority),
+        title: data.title,
       })
     );
+
+    setIsTitleVisible(true);
   };
 
   const triggerSubmit = () => refSubmitButton?.current?.click();
 
   useEffect(() => {
-    const subscription = watch(triggerSubmit);
+    const subscription = watch((data, changedValue) => {
+      if (changedValue.name === "list" || changedValue.name === "priority")
+        triggerSubmit();
+    });
     return () => subscription.unsubscribe();
   }, [watch]);
+
+  useEffect(() => {
+    if (isTitleVisible) setValue("title", title);
+  }, [isTitleVisible]);
 
   const handleDelete = () => setTodosData(removeTodoLS(todo.id));
 
@@ -62,11 +73,13 @@ const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
 
           <div className={styles.topBar_right}>
             <select {...register("list")} value={getListLS(listId)?.id}>
-              {getListsLS().map((value: ListType) => (
-                <option key={value.id} value={value.id}>
-                  {value.title}
-                </option>
-              ))}
+              {getListsLS()
+                .sort((a, b) => a.order - b.order)
+                .map((value: ListType) => (
+                  <option key={value.id} value={value.id}>
+                    {value.title}
+                  </option>
+                ))}
             </select>
 
             <button className={styles.deleteBtn} onClick={handleDelete}>
@@ -75,7 +88,34 @@ const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
           </div>
         </div>
 
-        <p className={styles.title}>{title}</p>
+        {isTitleVisible ? (
+          <h4 className={styles.title} onClick={() => setIsTitleVisible(false)}>
+            {title}
+          </h4>
+        ) : (
+          <div className={styles.titleInputContainer}>
+            <textarea
+              {...register("title", { required: true })}
+              className={styles.inputTitle}
+              defaultValue={title}
+            />
+            <div className={styles.formContainer_right}>
+              <button
+                onClick={handleSubmit(onSubmit)}
+                className={styles.addBtn}
+              >
+                {/* <button onClick={handleUpdateTitle} className={styles.addBtn}> */}
+                <CheckSVG />
+              </button>
+              <button
+                onClick={() => setIsTitleVisible(true)}
+                className={styles.cancelBtn}
+              >
+                <CrossSVG />
+              </button>
+            </div>
+          </div>
+        )}
 
         <button hidden={true} ref={refSubmitButton} type={"submit"} />
       </form>
