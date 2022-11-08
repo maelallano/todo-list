@@ -71,7 +71,7 @@ const List: React.FC<Props> = ({ list, todos, setListsData, setTodosData }) => {
         <button hidden={true} ref={refSubmitButton} type={"submit"} />
       </form>
 
-      <ul>
+      <ul className={styles.ulTodos}>
         {todos
           ?.sort((a, b) => b.priority - a.priority)
           .map((todo, index) => (
