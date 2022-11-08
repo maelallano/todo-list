@@ -44,7 +44,7 @@ const Project: React.FC<Props> = () => {
             }}
             onClick={handleResetData}
           >
-            Mockup data
+            Reset data
           </button>
         </header>
         <main className={styles.main}>
