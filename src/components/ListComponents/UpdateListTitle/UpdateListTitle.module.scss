@@ -1,0 +1,34 @@
+@use "styles/variables" as var;
+
+.title {
+  font-weight: bold;
+  font-size: var.$fontSizeText;
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+
+  &:first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.containerTitleInput {
+  display: flex;
+
+  .inputTitle {
+    font-weight: bold;
+    font-size: var.$fontSizeText;
+    margin-bottom: 1.2rem;
+  }
+
+  .cancelBtn {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

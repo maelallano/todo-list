@@ -26,19 +26,9 @@ const Project: React.FC<Props> = () => {
   return (
     <div className={styles.project}>
       <div className={styles.layout}>
-        <header>
+        <header className={styles.header}>
           <h1 className={styles.title}>Todo list app</h1>
-          <button
-            style={{
-              background: "white",
-              padding: "12px 16px",
-              borderRadius: 3,
-              fontSize: 20,
-              marginBottom: 20,
-              cursor: "pointer",
-            }}
-            onClick={handleResetData}
-          >
+          <button className={styles.mockupDataBtn} onClick={handleResetData}>
             Mockup data
           </button>
         </header>

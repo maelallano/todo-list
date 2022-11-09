@@ -1,0 +1,19 @@
+@use "styles/variables" as var;
+
+.list {
+  background-color: var.$lightgrey;
+  border-radius: var.$borderRadius;
+  padding: 1.1rem var.$mainSpacing var.$mainSpacing var.$mainSpacing;
+  min-width: var.$widthList;
+  width: var.$widthList;
+  margin-right: var.$mainSpacing;
+  height: fit-content;
+
+  .form {
+  }
+
+  .ulTodos {
+    max-height: 65vh;
+    overflow: scroll;
+  }
+}

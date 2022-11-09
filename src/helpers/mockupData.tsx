@@ -2,28 +2,24 @@ export const dataLists = [
   {
     id: 0,
     title: "Open",
-    // icon: "⭕️",
     color: "#EB5A46",
     order: 0,
   },
   {
     id: 1,
     title: "In progress",
-    // icon: "🔆️",
     color: "#00C2E0",
     order: 1,
   },
   {
     id: 2,
     title: "In review",
-    // icon: "📝",
     color: "#C377E0",
     order: 2,
   },
   {
     id: 3,
     title: "Done",
-    // icon: "✅",
     color: "#3981DE",
     order: 3,
   },

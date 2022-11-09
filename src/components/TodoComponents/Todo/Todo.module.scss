@@ -1,0 +1,19 @@
+@use "styles/variables" as var;
+
+.todo {
+  background-color: var.$white;
+  border-radius: var.$borderRadius;
+  padding: 1.1rem;
+  margin-bottom: var.$mainSpacing;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .form {
+    height: 100%;
+    select {
+      height: 100%;
+      max-width: 8rem;
+    }
+  }
+}

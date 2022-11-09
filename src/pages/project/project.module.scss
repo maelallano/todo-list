@@ -10,10 +10,24 @@
     min-height: 100vh;
     height: fit-content;
 
-    .title {
-      font-size: 2.4rem;
-      color: var.$white;
-      margin-bottom: 3.5rem;
+    .header {
+      display: flex;
+      margin-bottom: 2rem;
+
+      .title {
+        font-size: 2.4rem;
+        color: var.$white;
+        margin-bottom: 3.5rem;
+      }
+      .mockupDataBtn {
+        background: white;
+        padding: 1.2rem 1.6rem;
+        border-radius: 0.3rem;
+        font-size: 1.4rem;
+        cursor: pointer;
+        margin-left: 4rem;
+        height: fit-content;
+      }
     }
 
     .main,

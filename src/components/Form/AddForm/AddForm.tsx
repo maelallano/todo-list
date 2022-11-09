@@ -1,11 +1,22 @@
+import {
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+} from "react-hook-form";
+
 import styles from "./AddForm.module.scss";
+
 import { CheckSVG, CrossSVG } from "assets/icons";
 
+type FormValues = {
+  title: string;
+};
+
 type Props = {
-  handleSubmit: any;
-  onSubmit: any;
-  register: any;
-  handleCancel: any;
+  handleSubmit: UseFormHandleSubmit<FormValues>;
+  onSubmit: SubmitHandler<FormValues>;
+  register: UseFormRegister<FormValues>;
+  handleCancel: () => void;
   placeholder: string;
 };
 

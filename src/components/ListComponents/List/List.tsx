@@ -4,10 +4,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./List.module.scss";
 
 import { ListsType, ListType, TodosType } from "helpers/types";
-import { Todo, AddTodo } from "..";
-import { BinSVG, CrossSVG } from "assets/icons";
+import { Todo, AddTodo, TopBarList } from "components";
 import {
-  getListsLS,
   removeListLS,
   updateListLS,
   updateListsOrderLS,
@@ -23,7 +21,6 @@ type Props = {
 };
 
 const List: React.FC<Props> = ({ list, todos, setListsData, setTodosData }) => {
-  const { id, title } = list;
   const [isTitleVisible, setIsTitleVisible] = useState(true);
   const { register, handleSubmit, watch, setValue, setFocus } =
     useForm<FormValues>();
@@ -53,7 +50,7 @@ const List: React.FC<Props> = ({ list, todos, setListsData, setTodosData }) => {
   }, [watch]);
 
   useEffect(() => {
-    if (isTitleVisible) setValue("title", title);
+    if (isTitleVisible) setValue("title", list.title);
     if (!isTitleVisible) setFocus("title");
   }, [isTitleVisible]);
 
@@ -66,51 +63,13 @@ const List: React.FC<Props> = ({ list, todos, setListsData, setTodosData }) => {
   return (
     <li className={styles.list}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.topBar}>
-          {isTitleVisible ? (
-            <h3
-              className={styles.title}
-              onClick={() => setIsTitleVisible(false)}
-            >
-              {title}
-            </h3>
-          ) : (
-            <div className={styles.containerTitleInput}>
-              <input
-                {...register("title", { required: true })}
-                className={styles.inputTitle}
-                defaultValue={title}
-              />
-              <button
-                type="button"
-                className={styles.cancelBtn}
-                onClick={() => setIsTitleVisible(true)}
-              >
-                <CrossSVG />
-              </button>
-            </div>
-          )}
-
-          <div className={styles.topBar_right}>
-            <select {...register("order")} value={list.order}>
-              {getListsLS()
-                .sort((a, b) => a.order - b.order)
-                .map((value: ListType) => (
-                  <option key={value.id} value={value.order}>
-                    {value.order + 1}
-                  </option>
-                ))}
-            </select>
-
-            <button
-              type="button"
-              className={styles.deleteBtn}
-              onClick={handleDelete}
-            >
-              <BinSVG />
-            </button>
-          </div>
-        </div>
+        <TopBarList
+          isTitleVisible={isTitleVisible}
+          setIsTitleVisible={setIsTitleVisible}
+          register={register}
+          list={list}
+          handleDelete={handleDelete}
+        />
 
         <button hidden={true} ref={refSubmitButton} type={"submit"} />
       </form>
@@ -127,7 +86,7 @@ const List: React.FC<Props> = ({ list, todos, setListsData, setTodosData }) => {
           ))}
       </ul>
 
-      <AddTodo setTodosData={setTodosData} listId={id} />
+      <AddTodo setTodosData={setTodosData} listId={list.id} />
     </li>
   );
 };

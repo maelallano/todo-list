@@ -1,31 +1,21 @@
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import styles from "./AddTodo.module.scss";
+import styles from "./AddList.module.scss";
 
-import { TodosType } from "helpers/types";
-import { addTodoLS } from "helpers/localStorage";
-import { PriorityValues } from "helpers/constants";
+import { ListsType } from "helpers/types";
+import { addListLS } from "helpers/localStorage";
 import { AddForm } from "components";
 
 type FormValues = {
   title: string;
 };
 
-type Props = {
-  setTodosData: React.Dispatch<React.SetStateAction<TodosType>>;
-  listId: number;
-};
+type Props = { setListsData: React.Dispatch<React.SetStateAction<ListsType>> };
 
-const AddTodo: React.FC<Props> = ({ setTodosData, listId }) => {
+const AddList: React.FC<Props> = ({ setListsData }) => {
   const [isAdding, setIsAdding] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    // formState: { errors },
-    setFocus,
-  } = useForm<FormValues>();
+  const { register, handleSubmit, reset, setFocus } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     setIsAdding(false);
@@ -33,20 +23,19 @@ const AddTodo: React.FC<Props> = ({ setTodosData, listId }) => {
 
     const valueToAdd = {
       id: 0,
-      listId,
       title: data.title,
-      description: "",
-      priority: PriorityValues[0],
+      color: "#EB5A46",
+      order: 0,
     };
 
-    setTodosData(addTodoLS(valueToAdd));
+    setListsData(addListLS(valueToAdd));
   };
 
   useEffect(() => {
     if (isAdding) setFocus("title");
   }, [isAdding]);
 
-  const handleAddCard = () => setIsAdding(true);
+  const handleAddList = () => setIsAdding(true);
 
   function handleCancel() {
     setIsAdding(false);
@@ -61,15 +50,15 @@ const AddTodo: React.FC<Props> = ({ setTodosData, listId }) => {
           onSubmit={onSubmit}
           register={register}
           handleCancel={handleCancel}
-          placeholder="Enter a title for this card..."
+          placeholder="Enter a title for this list..."
         />
       ) : (
-        <button onClick={handleAddCard} className={styles.button}>
-          + Add a card
+        <button onClick={handleAddList} className={styles.button}>
+          Add a category
         </button>
       )}
     </>
   );
 };
 
-export default AddTodo;
+export default AddList;
