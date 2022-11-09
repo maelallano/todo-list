@@ -24,7 +24,8 @@ type Props = {
 const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
   const { title, listId } = todo;
   const [isTitleVisible, setIsTitleVisible] = useState(true);
-  const { register, handleSubmit, watch, setValue } = useForm<FormValues>();
+  const { register, handleSubmit, watch, setValue, setFocus } =
+    useForm<FormValues>();
   const refSubmitButton = useRef<HTMLButtonElement>(null);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
@@ -52,6 +53,7 @@ const Todo: React.FC<Props> = ({ todo, setTodosData }) => {
 
   useEffect(() => {
     if (isTitleVisible) setValue("title", title);
+    if (!isTitleVisible) setFocus("title");
   }, [isTitleVisible]);
 
   const handleDelete = () => setTodosData(removeTodoLS(todo.id));
