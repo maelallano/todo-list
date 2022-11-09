@@ -26,12 +26,14 @@ const Project: React.FC<Props> = () => {
   return (
     <div className={styles.project}>
       <div className={styles.layout}>
+
         <header className={styles.header}>
           <h1 className={styles.title}>Todo list app</h1>
           <button className={styles.mockupDataBtn} onClick={handleResetData}>
             Mockup data
           </button>
         </header>
+
         <main className={styles.main}>
           <ul className={styles.todoList}>
             {listsData
@@ -48,8 +50,10 @@ const Project: React.FC<Props> = () => {
                 />
               ))}
           </ul>
+
           <AddList setListsData={setListsData} />
         </main>
+
       </div>
     </div>
   );

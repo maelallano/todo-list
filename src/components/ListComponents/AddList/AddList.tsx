@@ -54,7 +54,7 @@ const AddList: React.FC<Props> = ({ setListsData }) => {
         />
       ) : (
         <button onClick={handleAddList} className={styles.button}>
-          Add a category
+          + Add a category
         </button>
       )}
     </>
