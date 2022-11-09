@@ -10,6 +10,7 @@ import { CheckSVG, CrossSVG } from "assets/icons";
 
 type FormValues = {
   title: string;
+  color?: string;
 };
 
 type Props = {
@@ -17,7 +18,7 @@ type Props = {
   onSubmit: SubmitHandler<FormValues>;
   register: UseFormRegister<FormValues>;
   handleCancel: () => void;
-  placeholder: string;
+  type: string;
 };
 
 const AddForm: React.FC<Props> = ({
@@ -25,14 +26,24 @@ const AddForm: React.FC<Props> = ({
   onSubmit,
   register,
   handleCancel,
-  placeholder,
+  type,
 }) => {
+  function handlePlaceholderTitle() {
+    switch (type) {
+      case "LIST":
+        return "Enter a title for this list...";
+      case "TODO":
+        return "Enter a title for this card...";
+      default:
+        return "Enter a title...";
+    }
+  }
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <textarea
         {...register("title", { required: true })}
         className={styles.inputTitle}
-        placeholder={placeholder}
+        placeholder={handlePlaceholderTitle()}
       />
       {/* {errors.title && <span>This field is required</span>} */}
 
@@ -44,6 +55,15 @@ const AddForm: React.FC<Props> = ({
           <CrossSVG />
         </button>
       </div>
+
+      {type === "LIST" && (
+        <input
+          {...register("color")}
+          type="color"
+          defaultValue={"#ebecf0"}
+          className={styles.inputColor}
+        />
+      )}
     </form>
   );
 };

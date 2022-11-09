@@ -61,7 +61,10 @@ const List: React.FC<Props> = ({ list, todos, setListsData, setTodosData }) => {
   };
 
   return (
-    <li className={styles.list}>
+    <li
+      className={styles.list}
+      style={{ backgroundColor: list.color || "#ebecf0" }}
+    >
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <TopBarList
           isTitleVisible={isTitleVisible}

@@ -2,13 +2,13 @@ export const dataLists = [
   {
     id: 0,
     title: "Todo",
-    color: "#EB5A46",
+    color: "#ebecf0",
     order: 0,
   },
   {
     id: 1,
     title: "In progress",
-    color: "#00C2E0",
+    color: "#ebecf0",
     order: 1,
   },
   // {
@@ -20,7 +20,7 @@ export const dataLists = [
   {
     id: 2,
     title: "Done",
-    color: "#3981DE",
+    color: "#ebecf0",
     order: 2,
   },
 ];

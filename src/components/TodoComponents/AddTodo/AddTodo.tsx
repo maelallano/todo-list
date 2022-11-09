@@ -55,7 +55,7 @@ const AddTodo: React.FC<Props> = ({ setTodosData, listId }) => {
           onSubmit={onSubmit}
           register={register}
           handleCancel={handleCancel}
-          placeholder="Enter a title for this card..."
+          type="TODO"
         />
       ) : (
         <button onClick={handleAddCard} className={styles.button}>

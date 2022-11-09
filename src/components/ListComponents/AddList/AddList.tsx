@@ -9,6 +9,7 @@ import { AddForm } from "components";
 
 type FormValues = {
   title: string;
+  color?: string;
 };
 
 type Props = { setListsData: React.Dispatch<React.SetStateAction<ListsType>> };
@@ -24,7 +25,7 @@ const AddList: React.FC<Props> = ({ setListsData }) => {
     const valueToAdd = {
       id: 0,
       title: data.title,
-      color: "#EB5A46",
+      color: data.color,
       order: 0,
     };
 
@@ -50,7 +51,7 @@ const AddList: React.FC<Props> = ({ setListsData }) => {
           onSubmit={onSubmit}
           register={register}
           handleCancel={handleCancel}
-          placeholder="Enter a title for this list..."
+          type={"LIST"}
         />
       ) : (
         <button onClick={handleAddList} className={styles.button}>

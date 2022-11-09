@@ -1,7 +1,7 @@
 export interface ListType {
   id: number;
   title: string;
-  color: string;
+  color?: string;
   order: number;
 }
 export type ListsType = ListType[];

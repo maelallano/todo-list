@@ -6,6 +6,7 @@
   width: 100%;
   min-width: var.$widthList;
   height: fit-content;
+  position: relative;
 
   .inputTitle {
     background-color: var.$white;
@@ -49,5 +50,11 @@
     .addBtn {
       margin-bottom: 1rem;
     }
+  }
+
+  .inputColor {
+    position: absolute;
+    bottom: -3.7rem;
+    left: 0;
   }
 }
