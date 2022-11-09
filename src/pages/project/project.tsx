@@ -17,11 +17,6 @@ const Project: React.FC<Props> = () => {
     JSON.parse(localStorage.getItem(KeysLS.Todos) || "[]")
   );
 
-  // console.log("listsData: ", listsData);
-  // console.log("todosData: ", todosData);
-  // localStorage.setItem(KeysLS.Lists, JSON.stringify(dataLists));
-  // localStorage.setItem(KeysLS.Todos, JSON.stringify(dataTodos));
-
   function handleResetData() {
     localStorage.setItem(KeysLS.Lists, JSON.stringify(dataLists));
     localStorage.setItem(KeysLS.Todos, JSON.stringify(dataTodos));
