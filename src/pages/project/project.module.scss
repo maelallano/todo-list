@@ -13,6 +13,7 @@
     .header {
       display: flex;
       margin-bottom: 2rem;
+      position: fixed;
 
       .title {
         font-size: 2.4rem;
@@ -21,11 +22,11 @@
       }
       .mockupDataBtn {
         background: white;
-        padding: 1.2rem 1.6rem;
+        padding: 0.8rem 1.2rem;
         border-radius: 0.3rem;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         cursor: pointer;
-        margin-left: 4rem;
+        margin-left: 3rem;
         height: fit-content;
       }
     }
@@ -33,6 +34,10 @@
     .main,
     .todoList {
       display: flex;
+    }
+
+    .main {
+      margin-top: 8rem;
     }
   }
 }
